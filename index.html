@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>jsの練習だよん</title>
+<meta property="og:locale" content="ja_JP">
+</head>
+<body>
+<canvas id="boidyamanatsu"></canvas>
+<!-- <canvas id="boid"></canvas> -->
+</body>
+<script src="index.bundle.js"></script>
+
+<!-- <script>
+  var SCREEN_SIZE = 600
+  var FPS = 30
+  var BOIDS_COUNT = 50
+  var BOID_SIZE = 10
+  var MAX_SPEED = 7
+  var boids = []
+  var canvas = document.getElementById('boid')
+  var ctx = canvas.getContext('2d')
+// クラスを作る
+  var Boid = function(id, x, y, vx, vy) {
+    this.id = id
+    this.x = x
+    this.y = y
+    this.vx = vx
+    this.vy = vy
+  }
+// 動かすメソッド
+  Boid.prototype.move = function() {
+    this.toCenter()
+    this.toAvoid()
+    this.toAverage()
+    this.cantOverMaxSpeed()
+    this.goBackIfOutOfScreen()
+    this.x += this.vx
+    this.y += this.vy
+  }
+//  集団に近づく
+  Boid.prototype.toCenter = function() {
+    var center = {x: 0, y:0}
+    for (var i = 0; i < boids.length; ++i) {
+      if (this.id != boids[i].id) {
+          center.x += boids[i].x
+          center.y += boids[i].y
+      }
+    }
+    center.x /= boids.length - 1
+    center.y /= boids.length - 1
+    this.vx += (center.x - this.x) / 100
+    this.vy += (center.y - this.y) / 100
+  }
+//　近づきすぎたらぶつからないように離れる
+  Boid.prototype.toAvoid = function() {
+    for (var i = 0; i < boids.length; ++i) {
+      if (this.id != boids[i].id) {
+        function distance(b1, b2) {
+          var x = b1.x - b2.x
+          var y = b1.y - b2.y
+          return Math.sqrt(x * x + y * y)
+        }
+        var d = distance(boids[i], this)
+        if (d < BOID_SIZE) {
+          this.vx -= boids[i].x - this.x
+          this.vy -= boids[i].y - this.y
+        }
+      }
+    }
+  }
+// みんなとスピードを合わせる
+  Boid.prototype.toAverage = function() {
+    var averV = {x: 0, y: 0};
+    for (var i = 0; i < boids.length; ++i) {
+      if (this.id != boids[i].id) {
+        averV.x += boids[i].vx;
+        averV.y += boids[i].vy;
+      }
+    }
+    averV.x /= boids.length - 1;
+    averV.y /= boids.length - 1;
+    this.vx += (averV.x-this.vx) / 6;
+    this.vy += (averV.y-this.vy) / 6;
+  }
+// 最大スピードを超えないようにする
+  Boid.prototype.cantOverMaxSpeed = function() {
+    var speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy)
+    if (speed >= MAX_SPEED) {
+        var r = MAX_SPEED / speed;
+        this.vx *= r
+        this.vy *= r
+    }
+  }
+// スクリーンの端にぶつかると方向をかえる
+  Boid.prototype.goBackIfOutOfScreen = function() {
+    if (this.x < 0 && this.vx < 0 || this.x > SCREEN_SIZE && this.vx > 0) {
+      this.vx *= -1
+    }
+    if (this.y < 0 && this.vy < 0 || this.y > SCREEN_SIZE && this.vy > 0) {
+      this.vy *= -1;
+    }
+  }
+
+// 読み込み終わりに実行される
+  window.onload = function() {
+    canvas.width = canvas.height = SCREEN_SIZE
+    ctx.fillStyle = "rgba(50, 200, 0, 0.8)"
+    for (var i = 0; i < BOIDS_COUNT; ++i) {
+      boids.push(
+        new Boid(
+          i,
+          Math.random() * SCREEN_SIZE,
+          Math.random() * SCREEN_SIZE,
+          0,
+          0
+        )
+      )
+    }
+    setInterval(
+      function() {
+        ctx.clearRect(0, 0, SCREEN_SIZE, SCREEN_SIZE);
+        for (var i = 0; i < boids.length; ++i) {
+          ctx.fillRect(boids[i]. x - BOID_SIZE / 2, boids[i].y - BOID_SIZE / 2, BOID_SIZE, BOID_SIZE)
+          boids[i].move()
+        }
+      },
+      1000/FPS);
+  }
+
+
+
+</script> -->
+
+</html>
