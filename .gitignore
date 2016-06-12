@@ -1,0 +1,5 @@
+# Ignore bundler config.
+index.bundle.js
+index.bundle.js.map
+/.bundle
+/node_modules/
