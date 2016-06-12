@@ -19,7 +19,7 @@ class Boid{
 		this.vy = vy;
 		this.id = id;
 		// x,y:現在の位置 vx,vy:移動量 id:インスタンスを識別するid
-	}	
+	}
 	//①多くの個体がいる方向に動く
 	move_center() {
 		var center = {x:0,y:0}
@@ -53,7 +53,7 @@ class Boid{
 	    //dは特定の２点の距離
 	    var d = distance(boids[i],this)
 	    //dがDIST_THRESHOLDより小さければ
-	    if( d < DIST_THRESHOLD) {
+	    if( d < BOID_SIZE) {
 	      // 離れるために、逆方向に動く
 	      this.vx -= (boids[i].x - this.x);
 	      this.vy -= (boids[i].y - this.y);
@@ -74,8 +74,8 @@ class Boid{
 	  average.y /= (NUMBER - 1);
 
 	  // 全体のベクトルの半分の移動速度にする
-	  this.vx = (average.x - this.vx)/2;
-	  this.vy = (average.y - this.vy)/2;
+	  this.vx += (average.x - this.vx)/6;
+	  this.vy += (average.y - this.vy)/6;
 	};
 
 	//④移動距離が一定以上になったら減速
